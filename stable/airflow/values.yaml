@@ -559,7 +559,7 @@ postgresql:
   ##
   ## Use the PostgreSQL chart dependency.
   ## Set to false if bringing your own PostgreSQL.
-  enabled: true
+  enabled: false
 
   ##
   ## The name of an existing secret that contains the postgres password.
@@ -571,7 +571,7 @@ postgresql:
   ##
   ## If you are bringing your own PostgreSQL, you should set postgresHost and
   ## also probably service.port, postgresUser, postgresPassword, and postgresDatabase
-  ## postgresHost:
+  postgresHost: 35.223.102.62
   ##
   ## PostgreSQL port
   service:
@@ -581,10 +581,10 @@ postgresql:
   ##
   ## PostgreSQL Password for the new user.
   ## If not set, a random 10 characters password will be used.
-  postgresPassword: airflow
+  postgresPassword: postgres
   ##
   ## PostgreSQL Database to create.
-  postgresDatabase: airflow
+  postgresDatabase: postgres
   ##
   ## Persistent Volume Storage configuration.
   ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
