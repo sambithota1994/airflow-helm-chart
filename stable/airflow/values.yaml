@@ -584,7 +584,7 @@ postgresql:
   postgresPassword: postgres
   ##
   ## PostgreSQL Database to create.
-  postgresDatabase: postgres
+  postgresDatabase: airflow
   ##
   ## Persistent Volume Storage configuration.
   ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
