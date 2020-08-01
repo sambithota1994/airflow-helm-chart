@@ -162,8 +162,6 @@ airflow:
      env:
       - name: GIT_SYNC_REPO
         value: https://github.com/marclamberti/airflow-dags.git
-      - name: GIT_SYNC_DEST
-        value: git
       - name: GIT_SYNC_WAIT
         value: "10"
       - name: GIT_SYNC_SSH
