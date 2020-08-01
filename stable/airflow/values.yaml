@@ -162,9 +162,9 @@ airflow:
           value: /tmp/git
      env:
       - name: GIT_SYNC_REPO
-          value: https://github.com/kubernetes/git-sync.git
-        - name: GIT_SYNC_DEST
-          value: git-sync
+        value: https://github.com/kubernetes/git-sync.git
+      - name: GIT_SYNC_DEST
+        value: git-sync
   ## Run initdb when the scheduler starts.
   initdb: true
 
