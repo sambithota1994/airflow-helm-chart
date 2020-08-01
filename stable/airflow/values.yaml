@@ -167,11 +167,7 @@ airflow:
       - name: GIT_SYNC_SSH
         value: "false"
   ## Additional volumeMounts to the main containers in the Scheduler, Worker and Web pods.
-  extraVolumeMounts: 
-     # - volumeMounts:
-          - name: git-sync-volume
-            mountPath: /dags
-  ##
+  
   ## Run initdb when the scheduler starts.
   initdb: true
 
