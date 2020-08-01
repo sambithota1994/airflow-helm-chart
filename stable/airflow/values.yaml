@@ -152,7 +152,17 @@ airflow:
 
   
   ## Additional volumeMounts to the main containers in the Scheduler, Worker and Web pods.
-  
+  extraContainers:
+    - name: git-sync
+        image: k8s.gcr.io/git-sync:v3.0.1
+        volumeMounts:
+        - name: markdown
+          mountPath: /tmp/git
+        env:
+        - name: GIT_SYNC_REPO
+          value: https://github.com/sambithota1994/airflow-dags.git
+        - name: GIT_SYNC_DEST
+          value: /usr/local/airflow/dags
   ## Run initdb when the scheduler starts.
   initdb: true
 
