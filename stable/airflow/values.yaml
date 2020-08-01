@@ -166,34 +166,11 @@ airflow:
         value: "10"
       - name: GIT_SYNC_SSH
         value: "false"
-      - name: GIT_SSH_KEY_FILE
-        value: /var/ssh/sshkey
-      - name: GIT_SSH_KNOWN_HOSTS_FILE
-        value: /var/knownhosts/known_hosts
   ## Additional volumeMounts to the main containers in the Scheduler, Worker and Web pods.
   extraVolumeMounts: 
      # - volumeMounts:
           - name: git-sync-volume
             mountPath: /dags
-
-  extraVolumes: 
-     #- volumes:
-        - name: ssh-key
-          secret:
-            secretName: dags-secret
-            items:
-            - key: key
-              path: sshkey
-        - name: known-hosts
-          secret:
-            secretName: dags-secret
-            items:
-            - key: known_hosts
-              path: known_hosts
-
-        - name: git-sync-volume
-          emptyDir: {}
-
   ##
   ## Run initdb when the scheduler starts.
   initdb: true
