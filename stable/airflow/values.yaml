@@ -150,21 +150,7 @@ airflow:
   #     - mountPath: /usr/local/airflow/logs
   #       name: logs-data
 
-  extraContainers: 
-  ## Additional containers to run alongside the Scheduler, Worker and Web pods
-  ## This could, for example, be used to run a sidecar that syncs DAGs from object storage.
-   - name: git-sync
-     image: k8s.gcr.io/git-sync:v3.1.1
-     
-
-     env:
-      - name: GIT_SYNC_REPO
-        value: https://github.com/sambithota1994/airflow-dags.git
-      - name: GIT_SYNC_WAIT
-        value: "10"
-      - name: GIT_SYNC_SSH
-        value: "false"
- 
+  
   ## Additional volumeMounts to the main containers in the Scheduler, Worker and Web pods.
   
   ## Run initdb when the scheduler starts.
