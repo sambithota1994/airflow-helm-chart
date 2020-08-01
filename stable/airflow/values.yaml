@@ -155,9 +155,7 @@ airflow:
   ## This could, for example, be used to run a sidecar that syncs DAGs from object storage.
    - name: git-sync
      image: cruse/git-sync:v3.1.5
-     volumeMounts:
-      - name: synchronised-dags
-        mountPath: /dags
+     
 
      env:
       - name: GIT_SYNC_REPO
@@ -166,10 +164,7 @@ airflow:
         value: "10"
       - name: GIT_SYNC_SSH
         value: "false"
-  extraVolumeMounts: 
-  ## Additional volumeMounts to the main containers in the Scheduler, Worker and Web pods.
-   - name: synchronised-dags
-     mountPath: /usr/local/airflow/dags
+ 
   ## Additional volumeMounts to the main containers in the Scheduler, Worker and Web pods.
   
   ## Run initdb when the scheduler starts.
