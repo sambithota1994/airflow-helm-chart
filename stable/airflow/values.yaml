@@ -165,7 +165,7 @@ airflow:
 
      env:
       - name: GIT_SYNC_REPO
-        value: git@gitlab.example.com/test.git
+        value: https://github.com/marclamberti/airflow-dags.git
       - name: GIT_SYNC_DEST
         value: git
       - name: GIT_SYNC_WAIT
@@ -186,7 +186,7 @@ airflow:
             name: known-hosts
             readOnly: true
           - name: git-sync-volume
-            mountPath: /tmp/git
+            mountPath: /dags
 
   extraVolumes: 
      #- volumes:
