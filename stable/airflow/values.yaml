@@ -161,7 +161,7 @@ airflow:
       - name: known-hosts
         mountPath: /var/knownhosts
       - name: git-sync-volume
-        mountPath: /tmp/git
+        mountPath: /dags
 
      env:
       - name: GIT_SYNC_REPO
