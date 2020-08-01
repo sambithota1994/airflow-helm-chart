@@ -443,7 +443,7 @@ ingress:
 persistence:
   ##
   ## enable persistance storage
-  enabled: true
+  enabled: false
   ##
   ## Existing claim to use
   existingClaim: nil
