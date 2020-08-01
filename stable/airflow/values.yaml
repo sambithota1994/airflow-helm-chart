@@ -154,7 +154,7 @@ airflow:
   ## Additional containers to run alongside the Scheduler, Worker and Web pods
   ## This could, for example, be used to run a sidecar that syncs DAGs from object storage.
    - name: git-sync
-     image: cruse/git-sync:v3.1.5
+     image: k8s.gcr.io/git-sync:v3.1.1
      
 
      env:
