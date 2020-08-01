@@ -156,10 +156,6 @@ airflow:
    - name: git-sync
      image: k8s.gcr.io/git-sync:v3.1.1
      volumeMounts:
-      - name: ssh-key
-        mountPath: /var/ssh
-      - name: known-hosts
-        mountPath: /var/knownhosts
       - name: git-sync-volume
         mountPath: /dags
 
@@ -179,12 +175,6 @@ airflow:
   ## Additional volumeMounts to the main containers in the Scheduler, Worker and Web pods.
   extraVolumeMounts: 
      # - volumeMounts:
-          - mountPath: "/var/ssh"
-            name: ssh-key
-            readOnly: true
-          - mountPath: "/var/knownhosts"
-            name: known-hosts
-            readOnly: true
           - name: git-sync-volume
             mountPath: /dags
 
