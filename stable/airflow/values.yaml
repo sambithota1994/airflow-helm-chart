@@ -159,7 +159,7 @@ airflow:
      image: k8s.gcr.io/git-sync:v3.1.1
      volumeMounts:
         - name: markdown
-          mountPath: /tmp/git
+          value: /tmp/git
      env:
       - name: GIT_SYNC_REPO
           value: https://github.com/kubernetes/git-sync.git
