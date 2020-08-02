@@ -152,7 +152,57 @@ airflow:
 
   
   ## Additional volumeMounts to the main containers in the Scheduler, Worker and Web pods.
- 
+ extraContainers: 
+  ## Additional containers to run alongside the Scheduler, Worker and Web pods
+  ## This could, for example, be used to run a sidecar that syncs DAGs from object storage.
+   - name: git-sync
+     image: k8s.gcr.io/git-sync:v3.1.1
+     volumeMounts:
+      - name: git-sync-volume
+        mountPath: /tmp/git
+
+     env:
+      - name: GIT_SYNC_REPO
+        value: git@gitlab.example.com/test.git
+      - name: GIT_SYNC_DEST
+        value: dags
+      - name: GIT_SYNC_WAIT
+        value: "10"
+      - name: GIT_SYNC_SSH
+        value: "false"
+      - name: GIT_SSH_KEY_FILE
+        value: /var/ssh/sshkey
+      - name: GIT_SSH_KNOWN_HOSTS_FILE
+        value: /var/knownhosts/known_hosts
+  ## Additional volumeMounts to the main containers in the Scheduler, Worker and Web pods.
+  extraVolumeMounts: 
+      - volumeMounts:
+          - mountPath: "/var/ssh"
+            name: ssh-key
+            readOnly: true
+          - mountPath: "/var/knownhosts"
+            name: known-hosts
+            readOnly: true
+          - name: git-sync-volume
+            mountPath: /tmp/git
+
+  extraVolumes: 
+     - volumes:
+        - name: ssh-key
+          secret:
+            secretName: dags-secret
+            items:
+            - key: key
+              path: sshkey
+        - name: known-hosts
+          secret:
+            secretName: dags-secret
+            items:
+            - key: known_hosts
+              path: known_hosts
+
+        - name: git-sync-volume
+          emptyDir: {}
   ## Run initdb when the scheduler starts.
   initdb: true
 
