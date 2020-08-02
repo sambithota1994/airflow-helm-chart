@@ -167,20 +167,19 @@ extraContainers:
 
      env:
       - name: GIT_SYNC_REPO
-        value: git@gitlab.example.com/test.git
+        value: https://github.com/sambithota1994/airflow-dags.git
       - name: GIT_SYNC_DEST
         value: git
       - name: GIT_SYNC_WAIT
         value: "10"
       - name: GIT_SYNC_SSH
-        value: "true"
+        value: "false"
       - name: GIT_SSH_KEY_FILE
         value: /var/ssh/sshkey
       - name: GIT_SSH_KNOWN_HOSTS_FILE
         value: /var/knownhosts/known_hosts
-  ## Additional volumeMounts to the main containers in the Scheduler, Worker and Web pods.
   extraVolumeMounts: 
-     # - volumeMounts:
+       - volumeMounts:
           - mountPath: "/var/ssh"
             name: ssh-key
             readOnly: true
@@ -191,7 +190,7 @@ extraContainers:
             mountPath: /tmp/git
 
   extraVolumes: 
-     #- volumes:
+     - volumes:
         - name: ssh-key
           secret:
             secretName: dags-secret
