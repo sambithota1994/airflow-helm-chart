@@ -152,60 +152,22 @@ airflow:
 
   
   ## Additional volumeMounts to the main containers in the Scheduler, Worker and Web pods.
-extraContainers: 
+extraContainers: []
   ## Additional containers to run alongside the Scheduler, Worker and Web pods
   ## This could, for example, be used to run a sidecar that syncs DAGs from object storage.
    - name: git-sync
-     image: k8s.gcr.io/git-sync:v3.1.1
+     image: k8s.gcr.io/git-sync:v3.0.1
      volumeMounts:
-      - name: ssh-key
-        mountPath: /var/ssh
-      - name: known-hosts
-        mountPath: /var/knownhosts
-      - name: git-sync-volume
-        mountPath: /tmp/git
-
-     env:
-      - name: GIT_SYNC_REPO
-        value: https://github.com/sambithota1994/airflow-dags.git
-      - name: GIT_SYNC_DEST
-        value: git
-      - name: GIT_SYNC_WAIT
-        value: "10"
-      - name: GIT_SYNC_SSH
-        value: "false"
-      - name: GIT_SSH_KEY_FILE
-        value: /var/ssh/sshkey
-      - name: GIT_SSH_KNOWN_HOSTS_FILE
-        value: /var/knownhosts/known_hosts
-  extraVolumeMounts: 
-       - volumeMounts:
-          - mountPath: "/var/ssh"
-            name: ssh-key
-            readOnly: true
-          - mountPath: "/var/knownhosts"
-            name: known-hosts
-            readOnly: true
-          - name: git-sync-volume
-            mountPath: /tmp/git
-
-  extraVolumes: 
-     - volumes:
-        - name: ssh-key
-          secret:
-            secretName: dags-secret
-            items:
-            - key: key
-              path: sshkey
-        - name: known-hosts
-          secret:
-            secretName: dags-secret
-            items:
-            - key: known_hosts
-              path: known_hosts
-
-        - name: git-sync-volume
-          emptyDir: {}
+     - name: synchronised-dags
+       mountPath: /dags
+  extraVolumeMounts: []
+  ## Additional volumeMounts to the main containers in the Scheduler, Worker and Web pods.
+   - name: synchronised-dags
+     mountPath: /usr/local/airflow/dags
+  extraVolumes: []
+  ## Additional volumes for the Scheduler, Worker and Web pods.
+  # - name: synchronised-dags
+  #   emptyDir: {}
   ## Run initdb when the scheduler starts.
   initdb: true
 
