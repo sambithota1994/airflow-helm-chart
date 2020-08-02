@@ -160,7 +160,7 @@ extraContainers: []
      volumeMounts:
      - name: synchronised-dags
        mountPath: /dags
-  extraVolumeMounts: []
+  extraVolumeMounts: 
   ## Additional volumeMounts to the main containers in the Scheduler, Worker and Web pods.
    - name: synchronised-dags
      mountPath: /usr/local/airflow/dags
